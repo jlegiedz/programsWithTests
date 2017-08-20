@@ -1,11 +1,9 @@
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import java.util.Optional;
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertFalse;
-
-
-
 /**
  * Created by asia on 19/08/17.
  */
@@ -16,53 +14,56 @@ public class Tests {
     public void setup(){
         f = new FirstNumbers();
     }
-
     @Test
     public void isNumFirst(){
-    boolean first = f.isFirst("3");
-    assertTrue(first);
+        Optional<Boolean> first = f.isFirst("3");
+    assertTrue(first.isPresent());
     }
     @Test
     public void isDoubleNumFirst(){
-        boolean first = f.isFirst("3.4");
-        assertTrue(first);
+        Optional<Boolean> first = f.isFirst("3.4");
+        assertTrue(first.isPresent());
     }
     @Test
     public void isLargerNumFirst(){
-        boolean first = f.isFirst("11");
-        assertTrue(first);
+        Optional<Boolean> first = f.isFirst("11");
+        assertTrue(first.isPresent());
     }
-
     @Test
     public void numNotFirst(){
-        boolean first = f.isFirst("4");
-        assertFalse(first);
+        Optional<Boolean> first = f.isFirst("4");
+        assertFalse(first.get());
     }
-
     @Test
     public void equalsOne(){
-        boolean first = f.isFirst("1");
-        assertFalse(first);
+        Optional<Boolean> first = f.isFirst("1");
+        assertFalse(first.get());
     }
     @Test
     public void equalsZero(){
-        boolean first = f.isFirst("0");
-        assertFalse(first);
+        Optional<Boolean> first = f.isFirst("0");
+        assertFalse(first.get());
     }
     @Test
     public void notLargerThanOne(){
-        boolean first = f.isFirst("-6");
-        assertFalse(first);
+        Optional<Boolean> first = f.isFirst("-6");
+        assertFalse(first.get());
     }
-    @Test(expected = NumberFormatException.class)
-    public void notParsableShouldthrowException() throws NumberFormatException
+    @Test
+    public void emptyString(){
+        Optional<Boolean> first = f.isFirst("");
+        assertFalse(first.isPresent());
+    }
+    @Test
+    public void notParsabletoDouble()
     {
-        boolean first = f.isFirst("jfghdg");
+        Optional<Boolean> first = f.isFirst("jfghdg");
+        assertFalse(first.isPresent());
     }
-
-    @Test(expected = NullPointerException.class)
-    public void entryIsNullShouldThrowException(){
-        boolean first = f.isFirst(null);
+    @Test
+    public void faileWhenNull(){
+        Optional<Boolean> first = f.isFirst(null);
+        assertFalse(first.isPresent());
     }
 
 }
