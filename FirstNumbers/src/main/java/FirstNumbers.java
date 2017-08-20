@@ -46,7 +46,7 @@ public class FirstNumbers {
                 isOk = false;
             }
         } catch (NumberFormatException ex) {
-            ex.printStackTrace();
+//            ex.printStackTrace();
             return Optional.empty();
         }
         return Optional.of(isOk);
