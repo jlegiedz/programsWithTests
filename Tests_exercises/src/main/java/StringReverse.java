@@ -14,4 +14,8 @@ public class StringReverse {
         }
         return reversedString.toString();
     }
+
+    public static void main(String[] args) {
+        StringReverse.reverse(null);
+    }
 }

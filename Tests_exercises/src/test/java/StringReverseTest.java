@@ -24,4 +24,12 @@ public class StringReverseTest {
         Assert.assertEquals(valid, StringReverse.reverse(toReverse));
     }
 
+    @Test(expected = NullPointerException.class)
+    public void nullString() {
+        String toReverse = null;
+        StringReverse.reverse(toReverse);
+    }
+
+
+
 }
